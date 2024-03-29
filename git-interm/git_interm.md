@@ -240,6 +240,38 @@ Usualmente queremos tener nuestra `cuenta personal` separada de nuestra `cuenta 
 ### Config
 #### user.name & user.email
 ---
+
+Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/`
+
+```bash
+$ tree -L 2 Documents/
+Documents/
+├── designa
+│   ├── acuerdo-286
+│   ├── administracion-usuarios-causanatura
+│   ├── aprendizajes-para-todos
+│   ├── avicola.app
+│   ├── causa-natura-media
+│   ├── database_backup
+│   ├── devops
+│   ├── privasol.mx
+│   ├── servicios-escolares
+│   └── ssh
+├── dev_hell
+│   ├── crunch-test
+│   ├── cmake_tutorial
+│   └── git-presentation
+└── upa
+    ├── oop
+    └── plat_web
+```
+
+
+<!-- end_slide -->
+
+### Config
+#### user.name & user.email
+---
 <!-- column_layout: [2, 1] -->
 <!-- column: 1 -->
 ![](./assets/lobos.png)
@@ -254,6 +286,8 @@ Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/`
   email = mitsiu.carreno@gmail.com
 [includeIf "gitdir:*/designa/"]
   path = .gitconfig.designa
+[includeIf "gitdir:*/upa/"]
+  path = .gitconfig.upa
 [core]
   editor = vim
 ```
@@ -276,6 +310,9 @@ Finalmente es posible tener multiples llaves ssh y asignar cada una a una cuenta
 
 ~/.ssh/config
 ```bash {all|1-2|4-5|all} +line_numbers
+Match host github.com exec "[ $(pwd | egrep -ic 'designa') = 1 ]"
+  IdentityFile ~/.ssh/id_ed25519_designa
+
 Match host github.com exec "[ $(pwd | egrep -ic 'upa') = 1 ]"
   IdentityFile ~/.ssh/id_ed25519_upa
 
@@ -416,6 +453,8 @@ git rm sofie
 
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
+
+**Agregar y commitear**  
 ```bash 
 $
 $
@@ -436,6 +475,7 @@ $ git commit -m'modif exist file'
  1 file changed, 1 insertion(+)
 ```
 <!-- column: 1 -->
+**Historial de commits**
 ```bash 
 $ git log --graph --oneline
 * ecf4186 (HEAD -> feature-1) Setting up 
@@ -680,7 +720,7 @@ Casos de uso:
 ---
 
 Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
-<!-- column_layout: [2, 1] -->
+<!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 Rama main
 ```bash +line_numbers
