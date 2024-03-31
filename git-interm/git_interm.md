@@ -4,7 +4,7 @@ author: Mitsiu Carreño
 theme:
     override:
         code:
-            theme_name: railsEnvy
+            theme_name: halcyon
 ---
 
 # tree Temario
@@ -38,6 +38,42 @@ theme:
 &nbsp;&nbsp;&nbsp;&nbsp;├── git add -p   
 &nbsp;&nbsp;&nbsp;&nbsp;├── Origins   
 &nbsp;&nbsp;&nbsp;&nbsp;└── Submodules   
+
+<!-- end_slide -->
+### Intro
+#### Convenciones
+---
+
+Bloques de código, con highlight:
+```bash {all|1|2-4|all}
+$ git log --oneline
+3cf53b0 (HEAD -> UNA-10) feat: UNA-10 1 commit
+70196b3 (main) Add filder struct and add titles
+84e3445 (origin/main) Upload wip presentation
+```
+Donde: 
+- $ = comando
+
+<!-- pause -->
+
+Hasta abajo de mi pantalla hay dos cuadros ```"Slides"``` y ```"Terminal"``` el activo se marca en color verde
+
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+Bloques de código ejecutables:
+```bash +exec
+# 🤖 : Este emoji es porque voy a ejecutar el 
+# código dentro de la presentación
+echo "Hola mundo"
+```
+<!-- column: 1 -->
+```bash
+# 🐱‍💻: Este otro emoji es porque voy a ejecutar
+# código en la pestaña "Terminal"
+ps aux
+```
+
+<!-- reset_layout -->
 
 <!-- end_slide -->
 ### Intro
@@ -169,7 +205,7 @@ Extra: Podemos listar los archivos de configuración con:
 🤖
 git config --list --show-origin
 ```
-**Nota: De tarea corran este comando dentro/fuera de un repositorio de git, ¿Qué cambia?**
+**Nota: Como ejericio corran este comando dentro/fuera de un repositorio de git, ¿Qué cambia?**
 
 <!-- end_slide -->
 
@@ -334,7 +370,7 @@ Para más información [](https://docs.github.com/en/authentication/connecting-t
 
 ```bash {all|1|3-9|5|6|all}
 $ touch new_file #Crear archivo nuevo
-$ 
+
 $ git status
 On branch feature-1
 Untracked files:
@@ -357,7 +393,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 ```bash {all|1|3-10|5|6-7,10|all}
 $ echo "Modificar archivo commiteado" > modif_file # Agregar texto a archivo existente
-$
+
 $ git status
 On branch feature-1
 Changes not staged for commit:
@@ -380,7 +416,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ```bash {all|1|4-8|5,7-8|6|all}
 $ git add modif_file new_file
-$
+
 $ git status
 On branch feature-1
 Changes to be committed:
@@ -456,19 +492,19 @@ git rm sofie
 
 **Agregar y commitear**  
 ```bash 
-$
-$
-$
-$
-$
+
+
+
+
+
 $ git add new_file
 $ git commit -m'adding new file'
 [feature-1 70f6e27] adding new file
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 new_file
-$
-$
-$
+
+
+
 $ git add modif_file
 $ git commit -m'modif exist file'
 [feature-1 dd574be] modif exist file
@@ -479,17 +515,17 @@ $ git commit -m'modif exist file'
 ```bash 
 $ git log --graph --oneline
 * ecf4186 (HEAD -> feature-1) Setting up 
-$
-$
-$
+
+
+
 $ git log --graph --oneline
 * 70f6e27 (HEAD -> feature-1) adding new file
 * ecf4186 (origin/feature-1) seting up prev commit
-$
-$
-$
-$
-$
+
+
+
+
+
 $ git log --graph --oneline
 * dd574be (HEAD -> feature-1) modif exist file
 * 70f6e27 adding new file
@@ -606,7 +642,7 @@ Casos de uso:
 - Cambios necesarios en local que `nunca deben subirse al repo` remoto (.env, config individuales, código de depuración)
 - Cambios locales momentaneamente irrelevantes para un fix urgente (queremos mantener los cambios solo de manera local, pero `queremos un directorio de trabajo limpio para resolver un bug`)
 
-```bash
+```bash {all|3-5|6-9|10-12|all}
 $ git status
 On branch UNA-25
 Changes to be committed:
@@ -631,10 +667,10 @@ Guardando en stash
 ```bash {1-5|7-13|15-19|all} 
 $ # git stash
 $ # git stash push 
-$ # git stash push -- nginx test
+$ # git stash push -- nginx.conf test
 $ git stash -m"My new stash" -- test nginx.conf
 Saved working directory and index state On UNA-25: My new stash
-$
+
 $ git status
 On branch UNA-25
 Untracked files:
@@ -642,11 +678,10 @@ Untracked files:
     queries
 
 nothing added to commit but untracked files present (use "git add" to track) 
-$
+
 $ git stash list
 stash@{0}: On UNA-25: My new stash
-stash@{1}: WIP on UNA-18: 7ff5ee3 fix: UNA-18 Allow single questions (without 
-dependencies) be omitted
+stash@{1}: WIP on UNA-18: 7ff5ee3 fix: UNA-18 Allow single questions be omitted
 ```
 **Nota: El stash más reciente siempre tiene el indice 0**
 
@@ -663,7 +698,7 @@ $ git stash show 0
  nginx.conf | 1 +
  test       | 0
  2 files changed, 1 insertion(+)
-$
+
 $ git stash pop 0
 On branch UNA-25
 Changes to be committed:
@@ -722,38 +757,139 @@ Casos de uso:
 Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
-Rama main
-```bash +line_numbers
+Setup
+```bash 
 $ git log --oneline
-088eec4 (HEAD -> main, origin/main, origin/HEAD) 
-  Merge branch 'UNA-24-R' into 'main'
-2f9b84b Merge branch 'UNA-24' into 'UNA-24-R'
-6b53b19 fix: UNA-24 questions 183 & 139 wasnt 
-  being saved
-1700174 (tag: v1.28.1) fix: move changelog
-779d3ee Merge branch 'UNA-21-R' into 'main'
-38b9613 Merge branch 'UNA-18-R' into 'main'
-bb1b139 Merge branch 'UNA-21' into 'UNA-21-R'
+531d90d (HEAD -> UNA-10) commit 4
+2f0b408 commit 3
+c8df2a7 commit 2
+28eacf7 commit 1
+70196b3 (main) Add filder struct and add titles
 ```
 
 <!-- column: 1 -->
-Rama UNA-25
-```bash +line_numbers
-$ git log --oneline
-150125c (HEAD -> UNA-25) 
-  fix: UNA-25 prepend CDMX questions and sort in select
-04a9c21 fix: UNA-24 questions 183 & 139 wasnt 
-  being saved
-04884b2 fix: move changelog
-616f0a5 chore: UNA-21 add db changelog
-38b9613 Merge branch 'UNA-18-R' into 'main'
-448f053 Merge branch 'UNA-18' into 'UNA-18-R'
-```
+
+![](./assets/cherry-p_1.png)
+ 
 <!-- end_slide -->
 
 ### Malabares remotos
 #### Cherry-picking
 ---
+
+Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+Setup
+```bash 
+# Regresamos a la rama principal (¿Por qué?)
+$ git checkout main
+# Actualizamos nuestra rama local (¿Por qué?)
+$ git pull origin main
+```
+
+<!-- column: 1 -->
+<!-- pause -->
+![](./assets/cherry-p_2.png)
+ 
+<!-- end_slide -->
+
+### Malabares remotos
+#### Cherry-picking
+---
+
+Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+<!-- column_layout: [3, 1] -->
+<!-- column: 0 -->
+Setup
+```bash
+# Creamos la rama correcta
+$ git checkout -b UNA-11
+Switched to a new branch 'UNA-11'
+$ git log --oneline
+70196b3 (HEAD -> UNA-11, main) Add filder struct and add titles
+```
+
+<!-- column: 1 -->
+
+![](./assets/cherry-p_3.png)
+ 
+<!-- end_slide -->
+
+### Malabares remotos
+#### Cherry-picking
+---
+
+Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+<!-- column_layout: [2, 1] -->
+<!-- column: 0 -->
+Setup
+```bash
+# Elegimos los commits a copiar a la nueva rama
+$ git cherry-pick 28eacf7
+[UNA-11 6f6b8d7] commit 1
+ Date: Sat Mar 30 15:43:48 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 git-interm/a
+
+$ git log --oneline
+6f6b8d7 (HEAD -> UNA-11) commit 1
+70196b3 (main) Add filder struct and add titles
+```
+**Importante:** Noten que `generamos un nuevo commit`
+
+<!-- column: 1 -->
+
+![](./assets/cherry-p_4.png)
+ 
+<!-- end_slide -->
+
+### Malabares remotos
+#### Cherry-picking
+---
+
+Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+<!-- column_layout: [2, 1] -->
+<!-- column: 0 -->
+Setup
+```bash
+# Elegimos los commits a copiar a la nueva rama
+$ git cherry-pick c8df2a7
+[UNA-11 0292526] commit 2
+ Date: Sat Mar 30 15:44:04 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 git-interm/b
+
+$ git cherry-pick 2f0b408
+[UNA-11 e440696] commit 3
+ Date: Sat Mar 30 15:44:13 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 git-interm/c
+
+$ git cherry-pick 531d90d
+[UNA-11 5b033f9] commit 4
+ Date: Sat Mar 30 15:44:22 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 git-interm/d
+```
+**Importante:** Noten que `generamos un nuevo commit`
+
+<!-- column: 1 -->
+
+![](./assets/cherry-p_5.png)
+ 
+<!-- end_slide -->
+
+### Malabares remotos
+#### Cherry-picking
+---
+
+Permite aplicar commits existentes en el directorio de trabajo actual.
+
+**Importante: Dado que se crean nuevos commits identicos a commits anteriores se debe tener cuidado de no generar conflictos:**
+- `La rama de donde copiaron los commits se va a borrar`
+- `Los archivos relacionados al commit que copiaron no se van a modificar hasta que se merge con main o la rama de donde se copió`
+
 <!-- end_slide -->
 
 ### Malabares remotos
@@ -764,6 +900,16 @@ $ git log --oneline
 ### F&#42;ck ups
 #### F&#42;ck up sencillo (--amend)
 ---
+
+$ git commit -m'UNA-10 1 commit'
+git log --oneline
+git commit --amend -m 'feat: UNA-10 1 commit'
+git log --oneline
+
+
+$ git rebase HEAD~3
+reword
+
 <!-- end_slide -->
 
 ### F&#42;ck ups

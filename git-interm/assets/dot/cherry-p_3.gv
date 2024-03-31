@@ -1,0 +1,59 @@
+digraph G {
+  #dot -Tsvg cherry-p_1.gv -o cherry-p_1.svg | kitty icat cherry-p_1.svg
+  graph [
+    fontname = "Monserrat",
+    fontcolor="white", 
+    #bgcolor="black", 
+    bgcolor="transparent"
+    penwidth=1.5, 
+    newrank=true, # Permite alinear HEAD
+    #rankdir="BT"
+    color=white
+  ];
+  node [
+    fontcolor="white",
+    fontname = "helvetica"
+    color="#37CDCB"
+  ];
+  edge [
+    fontcolor="white", 
+    color="white"
+    fontname = "helvetica"
+  ];
+  
+  HEAD [shape=rarrow, color="#D2A600", label="HEAD  "]
+  { rank = same; HEAD; m0;}
+  
+  subgraph cluster_0 {
+    a3 [label="531d90d\ncommit 4"]
+    a2 [label="2f0b408\ncommit 3"]
+    a1 [label="c8df2a7\ncommit 2"]
+    a0 [label="28eacf7\ncommit 1"]
+    a3 -> a2 -> a1 -> a0;
+    label = "UNA-10";
+    labelloc="t"
+  }
+
+/*
+  subgraph cluster_1 {
+    b3 [label=""]
+    b2 [label=""]
+    b1 [label=""]
+    b0 [label=""]
+    b3 -> b2 -> b1 -> b0
+    label = "UNA-11";
+    labelloc="t"
+  }
+  */
+  
+  subgraph cluster_2 {
+    m0 [label="70196b3"]
+    m0;
+    label = "main/UNA-11";
+    labelloc="b"
+  }
+  
+  a0 -> m0;
+  //m0 -> b0;
+}
+
