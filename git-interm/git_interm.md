@@ -889,6 +889,14 @@ Permite aplicar commits existentes en el directorio de trabajo actual.
 **Importante: Dado que se crean nuevos commits identicos a commits anteriores se debe tener cuidado de no generar conflictos:**
 - `La rama de donde copiaron los commits se va a borrar`
 - `Los archivos relacionados al commit que copiaron no se van a modificar hasta que se merge con main o la rama de donde se copió`
+```bash
+# Borrrar rama local
+$ git checkout -D UNA-10
+Deleted branch UNA-10 (was 531d90d)
+
+# Borrar rama remota
+$ git push origin --delete UNA-10
+```
 
 <!-- end_slide -->
 
