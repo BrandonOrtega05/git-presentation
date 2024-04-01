@@ -27,7 +27,7 @@ theme:
 │   ├── Cherry-picking   
 │   └── git rebase vs git merge (Qué/Cómo/Cuándo)    
 ├── F&#42;ck ups   
-│   ├── F&#42;ck up sencillo (--amend)   
+│   ├── F&#42;ck up sencillo; mensaje de commit (--amend)   
 │   ├── F&#42;ck up sencillo (git reset HEAD~1)   
 │   ├── F&#42;ck up intermedio (subir a *-R) [modo fácil] (cherry-pick & delete branch)   
 │   ├── F&#42;ck up intermedio (subir a *-R) [modo difícil](??)    
@@ -205,7 +205,6 @@ Extra: Podemos listar los archivos de configuración con:
 🤖
 git config --list --show-origin
 ```
-**Nota: Como ejericio corran este comando dentro/fuera de un repositorio de git, ¿Qué cambia?**
 
 <!-- end_slide -->
 
@@ -903,17 +902,282 @@ $ git push origin --delete UNA-10
 ### Malabares remotos
 #### git rebase vs git merge (Qué/Cómo/Cuándo)
 ---
+
+git-merge - Join two or more development histories together     
+git-rebase - Reapply commits on top of another base tip     
+
+Ambos comandos nos permiten integrar cambios entre dos ramas pero lo hacen de manera diferente.
+
+Comencemos por merge que estamos familiarizados:
+
+```bash
+git init
+touch a
+git add a
+git commit -m'main 1'
+[master (root-commit) fe2058d] main 1
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a
+
+touch b
+$ git add b
+$ git commit -m'main 2'
+[master 5bccf6f] main 2
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b
+
+git checkout -b merge-b
+Switched to a new branch 'merge-b'
+touch m-c
+git add m-c
+git commit -m'merge 1'
+[merge-b a49858a] merge 1
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 m-c
+$ touch m-d
+$ git add m-d 
+$ git commit -m'merge 2'
+[merge-b 09f28ff] merge 2
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 m-d
+
+git log --oneline
+09f28ff (HEAD -> merge-b) merge 2
+a49858a merge 1
+5bccf6f (master) main 2
+fe2058d main 1
+
+#Adelantemos main (simulando que otro colaborador hizo merge)
+touch c 
+$ git add c
+$ git commit -m'main 3'
+[master 1340a20] main 3
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c
+$ git log --oneline
+1340a20 (HEAD -> master) main 3
+5bccf6f main 2
+fe2058d main 1
+$ git pull origin master
+
+$ git checkout merge-b
+Switched to branch 'merge-b'
+
+```
+```bash
+Merge branch 'master' into merge-b
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+git merge master
+Merge made by the 'ort' strategy.
+ c | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c
+
+$ git log --oneline
+0b8851e (HEAD -> merge-b) Merge branch 'master' into merge-b
+1340a20 (master) main 3
+09f28ff merge 2
+a49858a merge 1
+5bccf6f main 2
+fe2058d main 1
+```
+
+<!-- end_slide -->
+
+<!-- jump_to_middle -->
+### F&#42;ck ups
+Los f&#42;ck ups sencillos son aquellos que son locales, una vez que se suben al repo remoto se debe `tener sensibilidad sobre el riesgo de que alguien haya descargado los cambios a su repositorio remoto.`
+
+Parecido al comando cherry-pick, estos comandos `literalmente estan cambiando la historia (commits nuevos que sustituyen a commits viejos).`
+
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up sencillo (--amend)
+#### F&#42;ck up sencillo; mensaje de commit (--amend)
+---
+Dada la integración de semantic release [](https://github.com/semantic-release/commit-analyzer?tab=readme-ov-file#default-rules-matching) que usamos en los proyectos, los mensajes de commit deben tener un formato especifico para generar una nueva versión a deployar.
+
+<!-- column_layout: [2,1] -->
+<!-- column: 0 -->
+```bash {all|1-7|9-18|all}
+$ git commit -m'arreglar archivo'
+[main (root-commit) 397c847] arreglar archivo
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a
+
+$ git log --oneline
+397c847 (HEAD -> main) arreglar archivo
+
+$ git commit --amend -m "fix: UNA-10 arreglar archivo"
+[main f35029d] fix: UNA-10 arreglar archivo
+ Date: Sun Mar 31 21:25:32 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a
+
+$ git log --oneline
+f35029d (HEAD -> main) fix: UNA-10 arreglar archivo
+
+$ git push origin UNA-10
+```
+<!-- column: 1 -->
+
+Aspectos a considerar:
+- Estamos generando nuevos commits (`sustituyendo historia`) por lo que si el commit ya fue pusheado esta solución solo se debe emplear si estamos seguros que nadie ha descargado el primer commit (397c847).
+- Amend `solo funciona para el último commit` (el más reciente)
+
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; Deshacer último commit (reset)
 ---
 
-$ git commit -m'UNA-10 1 commit'
-git log --oneline
-git commit --amend -m 'feat: UNA-10 1 commit'
-git log --oneline
+Hay situaciones en las que acabamos de hacer un commit solo para darnos cuenta que faltó hacer algun otro cambio, o falto agregar otro archivo.
 
+Es posible deshacer los últimos n commits:
+- Regresando los archivos a index
+- Descartando los cambios por completo
+
+
+```bash
+$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	a
+	b
+	c
+	d
+	e
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; Deshacer último commit (reset)
+---
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+```bash
+git add a && git commit -m'1 +a'
+[main (root-commit) ab641d8] 1 +a
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a
+$ git add b && git commit -m'2 +b'
+[main e940ab8] 2 +b
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b
+$ git add c && git commit -m'3 +c'
+[main 757a605] 3 +c
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c
+$ git add d && git commit -m'4 +d'
+[main 7087d5d] 4 +d
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 d
+$ git add e && git commit -m'5 +e'
+[main 21ae9ea] 5 +e
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 e
+```
+
+<!-- column: 1 -->
+
+```bash
+$ git log --oneline
+21ae9ea (HEAD -> main) 5 +e
+7087d5d 4 +d
+757a605 3 +c
+e940ab8 2 +b
+ab641d8 1 +a
+
+# Deshacer ultimo commit, mantener index y work dir
+$ git reset HEAD~
+
+$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." [...]) 
+	e
+
+nothing added to commit but untracked files present 
+$ git log --oneline
+7087d5d (HEAD -> main) 4 +d
+757a605 3 +c
+e940ab8 2 +b
+ab641d8 1 +a
+```
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; Deshacer último commit (reset)
+---
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+La opción `--hard` nos permite descartar completamente un commit
+```bash
+# Descartar completamente el último commit
+$ git reset HEAD~ --hard
+HEAD is now at 757a605 3 +c
+$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." [...])
+	e
+
+nothing added to commit but untracked files present
+$ git log --oneline
+757a605 (HEAD -> main) 3 +c
+e940ab8 2 +b
+ab641d8 1 +a
+```
+Se descartó completamente el archivo "d"
+
+<!-- column: 1 -->
+
+Para descartar mutliples commits basta con especificar cuantos commits detrás de HEAD
+
+```bash
+$ git reset HEAD~2
+$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." [...])
+	b
+	c
+	e
+
+nothing added to commit but untracked files present
+$ git log --oneline
+ab641d8 (HEAD -> main) 1 +a
+```
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; Deshacer último commit (reset)
+---
+
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; Deshacer último commit (reset)
+---
 
 $ git rebase HEAD~3
 reword
