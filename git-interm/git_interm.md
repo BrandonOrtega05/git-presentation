@@ -1,11 +1,23 @@
 ---
-title: Git intermedio
-author: Mitsiu Carreño
 theme:
     override:
         code:
             theme_name: halcyon
 ---
+<!-- column_layout: [1,2] -->
+<!-- column: 0 -->
+
+<!-- jump_to_middle -->
+# **Git intermedio**
+
+Mitsiu Alejandro Carreño Sarabia
+<!-- column: 1 -->
+![](./assets/memorizingsixgitcommands-big.png)
+
+<!-- reset_layout -->
+
+
+<!-- end_slide -->
 
 # tree Temario
 ---
