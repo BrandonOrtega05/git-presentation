@@ -42,7 +42,7 @@ Mitsiu Alejandro Carreño Sarabia
 │   ├── F&#42;ck up sencillo; Deshacer último commit (reset HEAD~)     
 │   ├── F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)    
 │   ├── F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
-│   ├── Mega f&#42;ck up; dificil; Subir un PR mal (revert -m 1 SHA1)     
+│   ├── Mega f&#42;ck up; crítico; Subir un PR mal (revert -m 1 SHA1)     
 │   ├── Mega f&#42;ck up; F&#42;ck up en el fix de otro F&#42;ck up (reflog)     
 │   └── Who f&#42;ck up?   
 └── Pt. 2?   
@@ -1416,43 +1416,131 @@ Finalmente queda resaltar que esta operación `reescribe la historia al generar 
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### 
+#### Mega f&#42;ck up; crítico; Subir un PR mal (revert -m 1 SHA1)
 ---
 
+You know when you fuck something up and you wish you had the power to hit undo?
+<!-- pause -->
+Like when you say the dummest thing in front of your biggest crush
+<!-- pause -->
+**Or when you push a commit that undo's your boss work, and it gets approved and merged into main?**
+We all have those days, but today is not going to be one of them.
+
+<!-- column_layout: [1,2] -->
+<!-- column: 0 -->
+
+**Anecdota time!**   
+1  Por casualidad ví que mi cambio mio aprobado unos días antes se había borrado  
+
+<!-- column: 1 -->
+![](./assets/PR_offending_commit.png)
+
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### Mega f&#42;ck up; crítico; Subir un PR mal (revert -m 1 SHA1)
+---
+
+2  Y este no era un PR pequeño... 
+
+![](./assets/PR_summary.png)
+
+3  Por una parte me urgía hacer deploy, pero por otra, ese PR era demasiado grande como para revisarlo apropiadamente.
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### Mega f&#42;ck up; crítico; Subir un PR mal (revert -m 1 SHA1)
+---
+
+```bash
+$ git revert -m 1 <SHA1>
+```
+
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+![](./assets/PR_offending_commit.png)
+<!-- column: 1 -->
+![](./assets/PR_fix_commit.png)
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### Mega f&#42;ck up; crítico; Subir un PR mal (revert -m 1 SHA1)
+---
+
+Revert no cambia los commits históricos, aun se podía preservar los cambios para una mejor revisión posterior, pero ya no estaban en main
+
+![](./assets/PR_history.png)
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### Mega f&#42;ck up; F&#42;ck up en el fix de otro F&#42;ck up (reflog)
+---
+
+Con reflog podemos `regresar operaciones destructivas` como reset, rebase
 
 ```
+$ git reflog
+c0d6242 (HEAD -> UNA-10) HEAD@{0}: rebase (finish): returning to refs/heads/UNA-10
+c0d6242 (HEAD -> UNA-10) HEAD@{1}: rebase (pick): c10
+bbd3e90 HEAD@{2}: rebase (pick): b10
+1bf9731 HEAD@{3}: rebase (start): checkout HEAD~6
+4edb9d2 HEAD@{4}: rebase (finish): returning to refs/heads/UNA-10
+4edb9d2 HEAD@{5}: rebase (start): checkout HEAD~6
+4edb9d2 HEAD@{6}: commit: c11
+a5bef5f HEAD@{7}: commit: c10
+ff33b1f HEAD@{8}: commit: b11
+e54f3f2 HEAD@{9}: commit: b10
+d53515f HEAD@{10}: commit: a11
+1bf9731 HEAD@{11}: commit: a10
+a6a7c9c (main) HEAD@{12}: checkout: moving from main to UNA-10
+a6a7c9c (main) HEAD@{13}: commit (initial): main 1 +a
+$ git reset --hard HEAD@{4}
+HEAD is now at 4edb9d2 c11
 ```
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### 
+#### Who f&#42;ck up?
 ---
+Finalmente...
 
+A veces veo código tan feo que necesito ponerle una cara, otras veces me sirve entender el contexto de cierta línea de código para entender mejor que esta haciendo o porqué se hizo así. Si se encuentran en una situación similar pueden usar:
 
 ```
+# git log -L <start_line>,<end_line>:path/to/file
+git log -L 12,15:api/src/controllers/users.controller.ts
 ```
+
+![](./assets/log_result.png)
+
+Copiamos el SHA1 (c76627696db109d766bbe19651c4d868dbb369f0)
+
 <!-- end_slide -->
 
-### Extras
-#### add -p
+### F&#42;ck ups
+#### Who f&#42;ck up?
 ---
+En el repo remoto abrimos cualquier commit
 
+![](./assets/log_any_commit.png)
 
-```
-```
 <!-- end_slide -->
 
-### Extras
-#### Origins
+### F&#42;ck ups
+#### Who f&#42;ck up?
 ---
 
-```
-```
+
+Y reemplazamos el SHA1 en la url
+
+![](./assets/log_view_commit.png)
+
 <!-- end_slide -->
 
-### Extras
-#### Submodules
----
-
-```
-```
+<!-- jump_to_middle -->
+## Gracias
