@@ -3,6 +3,9 @@ theme:
     override:
         code:
             theme_name: halcyon
+        default:
+            colors:
+                background: "10141c"
 ---
 <!-- column_layout: [1,2] -->
 <!-- column: 0 -->
@@ -1542,5 +1545,65 @@ Y reemplazamos el SHA1 en la url
 
 <!-- end_slide -->
 
+### Summary
+#### Cheatsheet
+---
+
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+```bash
+Ver resumen de commits 
+git log <--oneline>
+
+Stash create
+git stash push <-- file1 file2>
+
+Stash list
+git stash list
+
+Stash examinar entrada
+git stash show <n>
+
+Stash pop
+git stash pop <n>
+```
+
+<!-- column: 1 -->
+
+```bash
+Cherry-pick 
+git cherry-pick [ commits ]
+
+Descartar commit 
+git reset <--hard> HEAD~<n>
+
+Nuevo commit contrario
+git revert [ commits ]
+
+Nuevo commit contrario a merge
+git revert -m 1 <commit>
+
+Editar multiples commits
+git rebase -i HEAD~<n>
+
+Commits de sección de archivo
+git log -L start,end:path
+```
+
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+<!-- column_layout: [1,3] -->
+<!-- column: 0 -->
+
 <!-- jump_to_middle -->
 ## Gracias
+
+<!-- column: 1 -->
+
+![](./assets/uninformativegitcommit-big.png)
+
+<!-- reset_layout -->
+
+<!-- end_slide -->
