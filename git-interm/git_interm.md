@@ -288,7 +288,7 @@ Usualmente queremos tener nuestra `cuenta personal` separada de nuestra `cuenta 
 #### user.name & user.email
 ---
 
-Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/`
+Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/*`
 
 ```bash
 $ tree -L 2 Documents/
@@ -324,7 +324,7 @@ Documents/
 ![](./assets/lobos.png)
 <!-- column: 0 -->
 
-Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/`
+Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/*`
 
 ~/.gitconfig
 ```bash {all|1-3|4-5|all} +line_numbers
@@ -353,7 +353,7 @@ Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/`
 #### Autenticación SSH
 ---
 
-Finalmente es posible tener multiples llaves ssh y asignar cada una a una cuenta de github, en este caso basado en una subcarpeta `*/upa/` se referencía a la llave id_ed25519_upa
+Finalmente es posible tener multiples llaves ssh y asignar cada una a una cuenta de github, en este caso basado en una subcarpeta `*/designa/*` se referencía a la llave id_ed25519_designa
 
 ~/.ssh/config
 ```bash {all|1-2|4-5|all} +line_numbers
@@ -386,7 +386,7 @@ $ git status
 On branch feature-1
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-	new_file
+    new_file
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
@@ -410,7 +410,7 @@ On branch feature-1
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
-	modified:   modif_file
+    modified:   modif_file
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -432,8 +432,8 @@ $ git status
 On branch feature-1
 Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
-	modified:   modif_file
-	new file:   new_file
+    modified:   modif_file
+    new file:   new_file
 ```
 
 <!--end_slide -->
@@ -488,7 +488,7 @@ git rm sofie
 - **Commit** => Comando para `capturar el estado` (index/stage) de punto en el tiempo
 
 ![](./assets/head.gif)
-> Credito: https://www.youtube.com/@themoderncoder
+
 <!--end_slide -->
 
 ### Basics
@@ -702,7 +702,7 @@ stash@{1}: WIP on UNA-18: 7ff5ee3 fix: UNA-18 Allow single questions be omitted
 #### Stashing
 ---
 
-Recuperando de stash
+Recuperado de stash
 
 ```bash {1-4|6-21|21|all} +line_numbers
 $ git stash show 0
@@ -714,16 +714,16 @@ $ git stash pop 0
 On branch UNA-25
 Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
-	new file:   test
+    new file:   test
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
-	modified:   nginx.conf
+    modified:   nginx.conf
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-	queries
+    queries
 
 Dropped refs/stash@{0} (a41ae5cabf5c0de873e2bd2b872984538e3c46aa)
 ```
@@ -1052,35 +1052,11 @@ Aspectos a considerar:
 
 Hay situaciones en las que acabamos de hacer un commit solo para darnos cuenta que faltó hacer algun otro cambio, o falto agregar otro archivo.
 
-Es posible deshacer los últimos n commits:
-- Regresando los archivos a index
-- Descartando los cambios por completo
 
-
-```bash
-$ git status
-On branch main
-
-No commits yet
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	a
-	b
-	c
-	d
-	e
-
-nothing added to commit but untracked files present (use "git add" to track)
-```
-
-<!-- end_slide -->
-
-### F&#42;ck ups
-#### F&#42;ck up; Deshacer último commit (reset)
----
+**Set up**
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
+
 ```bash
 git add a && git commit -m'1 +a'
 [main (root-commit) ab641d8] 1 +a
@@ -1098,34 +1074,19 @@ $ git add d && git commit -m'4 +d'
 [main 7087d5d] 4 +d
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 d
+```
+<!-- column: 1 -->
+
+```bash
 $ git add e && git commit -m'5 +e'
 [main 21ae9ea] 5 +e
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 e
-```
 
-<!-- column: 1 -->
 
-```bash
 $ git log --oneline
 21ae9ea (HEAD -> main) 5 +e
 7087d5d 4 +d
-757a605 3 +c
-e940ab8 2 +b
-ab641d8 1 +a
-
-# Deshacer ultimo commit, mantener index y work dir
-$ git reset HEAD~
-
-$ git status
-On branch main
-Untracked files:
-  (use "git add <file>..." [...]) 
-	e
-
-nothing added to commit but untracked files present 
-$ git log --oneline
-7087d5d (HEAD -> main) 4 +d
 757a605 3 +c
 e940ab8 2 +b
 ab641d8 1 +a
@@ -1137,9 +1098,31 @@ ab641d8 1 +a
 ### F&#42;ck ups
 #### F&#42;ck up; Deshacer último commit (reset)
 ---
+Es posible deshacer los últimos n commits:
+
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
-La opción `--hard` nos permite descartar completamente un commit
+- Regresando los archivos a index `git reset HEAD~`
+```bash
+$ git reset HEAD~
+
+$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." [...]) 
+    e
+
+nothing added to commit but untracked files present
+$ git log --oneline
+7087d5d (HEAD -> main) 4 +d
+757a605 3 +c
+e940ab8 2 +b
+ab641d8 1 +a
+```
+
+<!-- column: 1 -->
+- Descartando completamente el último commit `git reset HEAD~ --hard` (el archivo d no esta en el working dir)
+
 ```bash
 # Descartar completamente el último commit
 $ git reset HEAD~ --hard
@@ -1148,33 +1131,13 @@ $ git status
 On branch main
 Untracked files:
   (use "git add <file>..." [...])
-	e
+    e
 
 nothing added to commit but untracked files present
 $ git log --oneline
 757a605 (HEAD -> main) 3 +c
 e940ab8 2 +b
 ab641d8 1 +a
-```
-Se descartó completamente el archivo "d"
-
-<!-- column: 1 -->
-
-Para descartar mutliples commits basta con especificar cuantos commits detrás de HEAD
-
-```bash
-$ git reset HEAD~2
-$ git status
-On branch main
-Untracked files:
-  (use "git add <file>..." [...])
-	b
-	c
-	e
-
-nothing added to commit but untracked files present
-$ git log --oneline
-ab641d8 (HEAD -> main) 1 +a
 ```
 <!-- reset_layout -->
 
@@ -1183,6 +1146,30 @@ ab641d8 (HEAD -> main) 1 +a
 ### F&#42;ck ups
 #### F&#42;ck up; Deshacer último commit (reset)
 ---
+
+Para descartar mutliples commits basta con especificar cuantos commits detrás de HEAD `git reset HEAD~2` (afecta los últimos dos commits)
+
+```bash
+$ git reset HEAD~2
+$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." [...])
+    b
+    c
+    e
+
+nothing added to commit but untracked files present
+$ git log --oneline
+ab641d8 (HEAD -> main) 1 +a
+```
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; Intermedio
+---
+
 
 
 <!-- end_slide -->
