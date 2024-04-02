@@ -22,7 +22,7 @@ Mitsiu Alejandro Carreño Sarabia
 # tree Temario
 ---
 ├── Intro   
-│   ├── ¿Dónde esta el mouse?   
+│   ├── ¿Dónde está el mouse?   
 │   └── ¿Qué significa el comando?   
 ├── Config   
 │   ├── Configurar su editor de textos    
@@ -89,7 +89,7 @@ ps aux
 
 <!-- end_slide -->
 ### Intro
-#### ¿Dónde esta el mouse?
+#### ¿Dónde está el mouse?
 ---
 
 En mi experiencia teclear es `más rápido` que usar el mouse.
@@ -101,19 +101,19 @@ En mi experiencia teclear es `más rápido` que usar el mouse.
     
 Así que uso el teclado!
     
-Pero ustedes usen lo que les hace sentir más comodos, pueden `aprender a usar el teclado` o pueden explorar y `aprender y configurar su interfaz gráfica` de preferencia. 
+Pero ustedes usen lo que les hace sentir más cómodos, pueden `aprender a usar el teclado` o pueden explorar y `aprender y configurar su interfáz gráfica` de preferencia. 
 
 <!-- end_slide -->
 ### Intro
 #### ¿Qué significa el comando?
 ---
 
-La formula general para cualquier comando de git es    
+La fórmula general para cualquier comando de git es    
 `git <command> <args>`      
 cuando tengan dudas usen     
 `git <command> --help` o usen [](https://git-scm.com/docs)
 
-¿Cómo sé la formula general?
+¿Cómo sé la fórmula general?
 ```bash
 $ git --help
 usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
@@ -158,7 +158,7 @@ git --version
 ---
 Primero es importante `configurar un editor de textos` con el que se sientan cómodos, puede ser de interfáz gráfica o de terminal.
 
-Para configurar el editor pueden usar el siguiente comando remplazando &lt;path&gt;:
+Para configurar el editor pueden usar el siguiente comando reemplazando &lt;path&gt;:
    
 **Nota: Esta opción cambia la configuración global (afecta a todos los repos)**
 ```bash
@@ -353,7 +353,7 @@ Personalmente divido mis cosas del trabajo en una subcarpeta `*/designa/*`
 #### Autenticación SSH
 ---
 
-Finalmente es posible tener multiples llaves ssh y asignar cada una a una cuenta de github, en este caso basado en una subcarpeta `*/designa/*` se referencía a la llave id_ed25519_designa
+Finalmente es posible tener múltiples llaves ssh y asignar cada una a una cuenta de github, en este caso basado en una subcarpeta `*/designa/*` se referencía a la llave id_ed25519_designa
 
 ~/.ssh/config
 ```bash {all|1-2|4-5|all} +line_numbers
@@ -461,7 +461,7 @@ Pero... `¿Qué es un commit?`
 - **HEAD** => Un `apuntador al commit más reciente de la rama actual`
 - **Commit** => Comando para `capturar el estado` (index/stage) de punto en el tiempo
 
-Imáginemos git como el juego adivina quién, con unas modificaciones...
+Imaginemos git como el juego adivina quién, con unas modificaciones...
 <!-- column: 1 -->
 ![](./assets/adivina-quien-guess-who.gif)
 <!-- reset_layout -->
@@ -651,7 +651,7 @@ Permite guardar los cambios del directorio de trabajo e index pero a la vez, per
 
 Casos de uso:
 - Cambios necesarios en local que `nunca deben subirse al repo` remoto (.env, config individuales, código de depuración)
-- Cambios locales momentaneamente irrelevantes para un fix urgente (queremos mantener los cambios solo de manera local, pero `queremos un directorio de trabajo limpio para resolver un bug`)
+- Cambios locales momentáneamente irrelevantes para un fix urgente (queremos mantener los cambios sólo de manera local, pero `queremos un directorio de trabajo limpio para resolver un bug`)
 
 ```bash {all|3-5|6-9|10-12|all}
 $ git status
@@ -694,7 +694,7 @@ $ git stash list
 stash@{0}: On UNA-25: My new stash
 stash@{1}: WIP on UNA-18: 7ff5ee3 fix: UNA-18 Allow single questions be omitted
 ```
-**Nota: El stash más reciente siempre tiene el indice 0**
+**Nota: El stash más reciente siempre tiene el índice 0**
 
 <!-- end_slide -->
 
@@ -765,7 +765,7 @@ Casos de uso:
 #### Cherry-picking
 ---
 
-Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+Ejemplo: Se creó la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie está trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 Setup
@@ -788,7 +788,7 @@ c8df2a7 commit 2
 #### Cherry-picking
 ---
 
-Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+Ejemplo: Se creó la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie está trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 Setup
@@ -809,7 +809,7 @@ $ git pull origin main
 #### Cherry-picking
 ---
 
-Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+Ejemplo: Se creó la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie está trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
 <!-- column_layout: [3, 1] -->
 <!-- column: 0 -->
 Setup
@@ -831,7 +831,7 @@ $ git log --oneline
 #### Cherry-picking
 ---
 
-Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+Ejemplo: Se creó la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie está trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
 <!-- column_layout: [2, 1] -->
 <!-- column: 0 -->
 Setup
@@ -859,7 +859,7 @@ $ git log --oneline
 #### Cherry-picking
 ---
 
-Ejemplo: Se creo la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie esta trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
+Ejemplo: Se creó la rama incorrecta UNA-10 en lugar de UNA-11 **Nota:** Nadie está trabajando el issue UNA-10 por lo que se puede borrar, pero queremos rescatar el trabajo avanzado
 <!-- column_layout: [2, 1] -->
 <!-- column: 0 -->
 Setup
@@ -897,7 +897,7 @@ $ git cherry-pick 531d90d
 
 Permite aplicar commits existentes en el directorio de trabajo actual.
 
-**Importante: Dado que se crean nuevos commits identicos a commits anteriores se debe tener cuidado de no generar conflictos:**
+**Importante: Dado que se crean nuevos commits idénticos a commits anteriores se debe tener cuidado de no generar conflictos:**
 - `La rama de donde copiaron los commits se va a borrar`
 - `Los archivos relacionados al commit que copiaron no se van a modificar hasta que se merge con main o la rama de donde se copió`
 ```bash
@@ -1005,14 +1005,14 @@ fe2058d main 1
 ### F&#42;ck ups
 Los f&#42;ck ups sencillos son aquellos que son locales, una vez que se suben al repo remoto se debe `tener sensibilidad sobre el riesgo de que alguien haya descargado los cambios a su repositorio remoto.`
 
-Parecido al comando cherry-pick, estos comandos `literalmente estan cambiando la historia (commits nuevos que sustituyen a commits viejos).`
+Parecido al comando cherry-pick, estos comandos `literalmente están cambiando la historia (commits nuevos que sustituyen a commits viejos).`
 
 <!-- end_slide -->
 
 ### F&#42;ck ups
 #### F&#42;ck up sencillo; mensaje de commit (--amend)
 ---
-Dada la integración de semantic release [](https://github.com/semantic-release/commit-analyzer?tab=readme-ov-file#default-rules-matching) que usamos en los proyectos, los mensajes de commit deben tener un formato especifico para generar una nueva versión a deployar.
+Dada la integración de semantic release [](https://github.com/semantic-release/commit-analyzer?tab=readme-ov-file#default-rules-matching) que usamos en los proyectos, los mensajes de commit deben tener un formato específico para generar una nueva versión a deployar.
 
 <!-- column_layout: [2,1] -->
 <!-- column: 0 -->
@@ -1050,7 +1050,7 @@ Aspectos a considerar:
 #### F&#42;ck up sencillo; Deshacer último commit (reset)
 ---
 
-Hay situaciones en las que acabamos de hacer un commit solo para darnos cuenta que faltó hacer algun otro cambio, o falto agregar otro archivo.
+Hay situaciones en las que acabamos de hacer un commit solo para darnos cuenta que faltó hacer algún otro cambio, o falto agregar otro archivo.
 
 
 **Set up**
@@ -1121,7 +1121,7 @@ ab641d8 1 +a
 ```
 
 <!-- column: 1 -->
-- Descartando completamente el último commit `git reset HEAD~ --hard` (el archivo d no esta en el working dir)
+- Descartando completamente el último commit `git reset HEAD~ --hard` (el archivo d no está en el working dir)
 
 ```bash
 # Descartar completamente el último commit
@@ -1170,7 +1170,7 @@ ab641d8 (HEAD -> main) 1 +a
 #### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)
 ---
 
-Muy similar al ejemplo de cherry-pick, pero que pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente esta trabajando)
+Muy similar al ejemplo de cherry-pick, pero qué pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente está trabajando)
 
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
@@ -1215,7 +1215,7 @@ $ git cherry-pick d53515f ff33b1f 4edb9d2
 #### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)
 ---
 
-Muy similar al ejemplo de cherry-pick, pero que pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente esta trabajando)
+Muy similar al ejemplo de cherry-pick, pero qué pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente está trabajando)
 
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
@@ -1263,7 +1263,7 @@ git revert d53515f ff33b1f 4edb9d2
 #### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)
 ---
 
-Muy similar al ejemplo de cherry-pick, pero que pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente esta trabajando)
+Muy similar al ejemplo de cherry-pick, pero qué pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente está trabajando)
 
 ```bash
 $ git log --oneline
@@ -1345,7 +1345,7 @@ $ git rebase -i HEAD~6
 
 En nuestra situación queremos cambiar el mensaje del commit (`reword`) `primero debemos indicar la operación a realizar`
 
-**Noten que los commits estan ordenados comenzando por el más antiguo**
+**Noten que los commits están ordenados comenzando por el más antiguo**
 
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
@@ -1380,7 +1380,7 @@ Guardamos y cerramos el editor
 #### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
 ---
 
-A continuación se abrira el editor de textos para `escribir el nuevo mensaje del commit`, además de mostrar el contexto del commit.
+A continuación se abrirá el editor de textos para `escribir el nuevo mensaje del commit`, además de mostrar el contexto del commit.
 
 ```bash
 fix: UNA-10 a10
@@ -1421,16 +1421,16 @@ Finalmente queda resaltar que esta operación `reescribe la historia al generar 
 
 You know when you fuck something up and you wish you had the power to hit undo?
 <!-- pause -->
-Like when you say the dummest thing in front of your biggest crush
+Like when you say the dumbest thing in front of your biggest crush
 <!-- pause -->
-**Or when you push a commit that undo's your boss work, and it gets approved and merged into main?**
+**Or when you push a commit that undoes your boss work, and it gets approved and merged into main?**
 We all have those days, but today is not going to be one of them.
 
 <!-- column_layout: [1,2] -->
 <!-- column: 0 -->
 
 **Anecdota time!**   
-1  Por casualidad ví que mi cambio mio aprobado unos días antes se había borrado  
+1  Por casualidad ví que mi cambio mío aprobado unos días antes se había borrado  
 
 <!-- column: 1 -->
 ![](./assets/PR_offending_commit.png)
@@ -1472,7 +1472,7 @@ $ git revert -m 1 <SHA1>
 #### Mega f&#42;ck up; crítico; Subir un PR mal (revert -m 1 SHA1)
 ---
 
-Revert no cambia los commits históricos, aun se podía preservar los cambios para una mejor revisión posterior, pero ya no estaban en main
+Revert no cambia los commits históricos, aún se podía preservar los cambios para una mejor revisión posterior, pero ya no estaban en main
 
 ![](./assets/PR_history.png)
 <!-- end_slide -->
@@ -1509,7 +1509,7 @@ HEAD is now at 4edb9d2 c11
 ---
 Finalmente...
 
-A veces veo código tan feo que necesito ponerle una cara, otras veces me sirve entender el contexto de cierta línea de código para entender mejor que esta haciendo o porqué se hizo así. Si se encuentran en una situación similar pueden usar:
+A veces veo código tan feo que necesito ponerle una cara, otras veces me sirve entender el contexto de cierta línea de código para entender mejor qué está haciendo o porqué se hizo así. Si se encuentran en una situación similar pueden usar:
 
 ```
 # git log -L <start_line>,<end_line>:path/to/file
