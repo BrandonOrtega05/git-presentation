@@ -27,29 +27,29 @@ Mitsiu Alejandro Carreño Sarabia
 ├── Config   
 │   ├── Configurar su editor de textos    
 │   ├── PS1    
-│   ├── Configurar username / email       
+│   ├── user.name & user.email       
 │   └── Autenticación SSH   
 ├── Basics   
 │   ├── Git workflow (Read your outputs)    
 │   └── Git for dummies (Cheatsheet)    
 ├── Malabares locales   
-│   ├── git branch   
+│   ├── git branch (Cheatsheet)   
 │   ├── Stashing   
 ├── Malabares remotos   
-│   ├── Cherry-picking   
-│   └── git rebase vs git merge (Qué/Cómo/Cuándo)    
+│   └── Cherry-picking   
 ├── F&#42;ck ups   
 │   ├── F&#42;ck up sencillo; mensaje de commit (--amend)   
-│   ├── F&#42;ck up sencillo (git reset HEAD~1)   
-│   ├── F&#42;ck up intermedio (subir a *-R) [modo fácil] (cherry-pick & delete branch)   
-│   ├── F&#42;ck up intermedio (subir a *-R) [modo difícil](??)    
-│   ├── F&#42;ck up complicado (rebase -i)   
-│   ├── Mega f&#42;ck up (subir algo mal)   Agregar git revert y git revert -m 1 SHA1     
+│   ├── F&#42;ck up sencillo; Deshacer último commit (reset HEAD~)     
+│   ├── F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)    
+│   ├── F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
+│   ├── Mega f&#42;ck up; dificil; Subir un PR mal (revert -m 1 SHA1)     
+│   ├── Mega f&#42;ck up; F&#42;ck up en el fix de otro F&#42;ck up (reflog)     
 │   └── Who f&#42;ck up?   
-└── Extras   
+└── Pt. 2?   
 &nbsp;&nbsp;&nbsp;&nbsp;├── git add -p   
 &nbsp;&nbsp;&nbsp;&nbsp;├── Origins   
-&nbsp;&nbsp;&nbsp;&nbsp;└── Submodules   
+&nbsp;&nbsp;&nbsp;&nbsp;├── Submodules   
+&nbsp;&nbsp;&nbsp;&nbsp;└── git rebase vs git merge (Qué/Cómo/Cuándo)    
 
 <!-- end_slide -->
 ### Intro
@@ -570,7 +570,7 @@ To github.com:mitsiu-carreno/git-interm-presentation.git
 <!--end_slide -->
 
 ### Basics
-#### Git para dummies
+#### Git for dummies (Cheatsheet)
 ---
 
 ![](./assets/commands.png)
@@ -578,7 +578,7 @@ To github.com:mitsiu-carreno/git-interm-presentation.git
 <!--end_slide -->
 
 ### Basics
-#### Git para dummies (Cheatsheet)
+#### Git for dummies (Cheatsheet)
 ---
 
 
@@ -1047,7 +1047,7 @@ Aspectos a considerar:
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up; Deshacer último commit (reset)
+#### F&#42;ck up sencillo; Deshacer último commit (reset)
 ---
 
 Hay situaciones en las que acabamos de hacer un commit solo para darnos cuenta que faltó hacer algun otro cambio, o falto agregar otro archivo.
@@ -1096,7 +1096,7 @@ ab641d8 1 +a
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up; Deshacer último commit (reset)
+#### F&#42;ck up sencillo; Deshacer último commit (reset)
 ---
 Es posible deshacer los últimos n commits:
 
@@ -1144,7 +1144,7 @@ ab641d8 1 +a
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up; Deshacer último commit (reset)
+#### F&#42;ck up sencillo; Deshacer último commit (reset)
 ---
 
 Para descartar mutliples commits basta con especificar cuantos commits detrás de HEAD `git reset HEAD~2` (afecta los últimos dos commits)
@@ -1167,42 +1167,292 @@ ab641d8 (HEAD -> main) 1 +a
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up; Intermedio
+#### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)
 ---
 
+Muy similar al ejemplo de cherry-pick, pero que pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente esta trabajando)
+
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+
+```bash
+git log --oneline
+4edb9d2 (HEAD -> UNA-10) c11  # Rama incorrecta
+a5bef5f c10                   # Rama correcta
+ff33b1f b11                   # Rama incorrecta
+e54f3f2 b10                   # Rama correcta
+d53515f a11                   # Rama incorrecta
+1bf9731 a10                   # Rama correcta
+a6a7c9c (main) main 1 +a      # Main
+```
+<!-- column: 1 --> 
+```bash
+$ git checkout main
+
+$ git checkout -b UNA-11
+Switched to a new branch 'UNA-11'
+
+$ git cherry-pick d53515f ff33b1f 4edb9d2
+[UNA-11 908ed17] a11
+ Date: Tue Apr 2 11:38:11 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a11
+[UNA-11 ab582cd] b11
+ Date: Tue Apr 2 11:39:02 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b11
+[UNA-11 41df64b] c11
+ Date: Tue Apr 2 11:39:28 2024 -0600
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c11
+
+```
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)
+---
+
+Muy similar al ejemplo de cherry-pick, pero que pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente esta trabajando)
+
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+```bash
+$ git checkout UNA-10
+Switched to branch 'UNA-10'
+
+$ git revert d53515f ff33b1f 4edb9d2
+
+This reverts commit 
+     d53515ff4efcfbf2ba3c7a6c95c0492c60b5b616.
+
+# Please enter the commit message for your changes
+# Lines starting with '#' will be ignored, 
+# and an empty message aborts the commit.
+#
+# On branch UNA-10
+# Revert currently in progress.
+#
+# Changes to be committed:
+#   deleted:    a11
+#
+```
+
+<!-- column: 1 -->
+
+```bash
+git revert d53515f ff33b1f 4edb9d2
+[UNA-10 caaac7a] Revert "a11"
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 a11
+[UNA-10 288afd4] Revert "b11"
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 b11
+[UNA-10 c5ba190] Revert "c11"
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 c11
+
+```
+<!-- reset_layout -->
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)
+---
+
+Muy similar al ejemplo de cherry-pick, pero que pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente esta trabajando)
+
+```bash
+$ git log --oneline
+c5ba190 (HEAD -> UNA-10) Revert "c11"
+288afd4 Revert "b11"
+caaac7a Revert "a11"
+4edb9d2 c11
+a5bef5f c10
+ff33b1f b11
+e54f3f2 b10
+d53515f a11
+1bf9731 a10
+a6a7c9c (main) main 1 +a
+
+$ git checkout main
+$ git merge UNA-11
+$ git merge UNA-10
+```
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
+---
+
+Regresando al setup anterior, pero ahora imaginemos que el error es distinto, todos los commits pertenecen a la rama pero olvidamos poner "fix: UNA-10" a todos nuestros commits
+
+```bash 
+git log --oneline
+4edb9d2 (HEAD -> UNA-10) c11
+a5bef5f c10                  
+ff33b1f b11                 
+e54f3f2 b10                
+d53515f a11               
+1bf9731 a10              
+a6a7c9c (main) main 1 +a
+
+
+$ git rebase -i HEAD~6
+```
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
+---
+
+`git rebase -i HEAD~<n>` Abre el editor de texto y nos permite realizar cualquiera de las siguientes operaciones: 
+
+```bash
+$ git rebase -i HEAD~6
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+#         create a merge commit using the original merge commit's
+#         message (or the oneline, if no original merge commit was
+#         specified); use -c <commit> to reword the commit message
+# u, update-ref <ref> = track a placeholder for the <ref> to be updated
+#                       to this position in the new commits. The <ref> is
+#                       updated at the end of the rebase
+```
 
 
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up; Deshacer último commit (reset)
+#### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
 ---
 
-$ git rebase HEAD~3
-reword
+En nuestra situación queremos cambiar el mensaje del commit (`reword`) `primero debemos indicar la operación a realizar`
+
+**Noten que los commits estan ordenados comenzando por el más antiguo**
+
+<!-- column_layout: [1,1] -->
+<!-- column: 0 -->
+
+```bash
+$ git rebase -i HEAD~6
+pick 1bf9731 a10
+pick d53515f a11
+pick e54f3f2 b10
+pick ff33b1f b11
+pick a5bef5f c10
+pick 4edb9d2 c11
+```
+<!-- column: 1 -->
+
+```bash
+$ git rebase -i HEAD~6
+reword 1bf9731 a10
+reword d53515f a11
+reword e54f3f2 b10
+reword ff33b1f b11
+reword a5bef5f c10
+reword 4edb9d2 c11
+```
+<!-- reset_layout -->
+
+Guardamos y cerramos el editor
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
+---
+
+A continuación se abrira el editor de textos para `escribir el nuevo mensaje del commit`, además de mostrar el contexto del commit.
+
+```bash
+fix: UNA-10 a10
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Tue Apr 2 11:37:33 2024 -0600
+#
+# interactive rebase in progress; onto a6a7c9c
+# Last command done (1 command done):
+#    reword 1bf9731 a10
+# Next commands to do (5 remaining commands):
+#    reword d53515f a11
+#    reword e54f3f2 b10
+# You are currently editing a commit while rebasing branch 'UNA-10' on 'a6a7c9c'.
+#
+# Changes to be committed:
+#	new file:   a10
+#
+```
+
+Esta operación se repetirá para cada commit seleccionado
+
+<!-- end_slide -->
+
+### F&#42;ck ups
+#### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
+---
+
+Finalmente queda resaltar que esta operación `reescribe la historia al generar nuevos commit` así que usenla de manera apropiada
 
 <!-- end_slide -->
 
 ### F&#42;ck ups
 #### 
 ---
+
+
+```
+```
 <!-- end_slide -->
 
 ### F&#42;ck ups
 #### 
 ---
+
+
+```
+```
 <!-- end_slide -->
 
 ### Extras
 #### add -p
 ---
+
+
+```
+```
 <!-- end_slide -->
 
 ### Extras
 #### Origins
 ---
+
+```
+```
 <!-- end_slide -->
 
 ### Extras
 #### Submodules
 ---
+
+```
+```
