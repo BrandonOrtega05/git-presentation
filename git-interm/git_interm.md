@@ -5,7 +5,7 @@ theme:
             theme_name: halcyon
         default:
             colors:
-                background: "10141c"
+                #background: "10141c"
 ---
 <!-- column_layout: [1,2] -->
 <!-- column: 0 -->
@@ -55,9 +55,20 @@ Mitsiu Alejandro Carreño Sarabia
 &nbsp;&nbsp;&nbsp;&nbsp;└── git rebase vs git merge (Qué/Cómo/Cuándo)    
 
 <!-- end_slide -->
+
+<!-- jump_to_middle -->
 ### Intro
-#### Convenciones
 ---
+
+<!-- end_slide -->
+
+### Intro
+#### Convenciones - Algunos slides dicen `EJERCICIO 0`
+---
+
+En la sección superior está marcado cuando hay un ejercicio relacionado al slide:
+- Pueden clonar el repo pero no van a poder hacer push
+- Pueden hacer fork y hacer push a su copia del repo 
 
 Bloques de código, con highlight:
 ```bash {all|1|2-4|all}
@@ -153,6 +164,12 @@ git --version
 ```
 
 🐱‍💻 Veamos el resultado completo de `git --help`
+
+<!-- end_slide -->
+
+<!-- jump_to_middle -->
+### Config
+---
 
 <!-- end_slide -->
 
@@ -372,6 +389,12 @@ Host github.com
 
 Para más información [](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
+<!-- end_slide -->
+
+<!-- jump_to_middle -->
+### Intro
+---
+
 <!--end_slide -->
 
 ### Basics
@@ -495,7 +518,7 @@ git rm sofie
 <!--end_slide -->
 
 ### Basics
-#### Git workflow (Read your outputs)
+#### Git workflow (Read your outputs) `EJERCICIO 1`
 ---
 
 - **HEAD** => Un `apuntador al commit más reciente de la rama actual`
@@ -610,6 +633,12 @@ git push origin <branch>
 
 *origin => remote name
 
+<!-- end_slide -->
+
+<!-- jump_to_middle -->
+### Malabares locales
+---
+
 <!--end_slide -->
 
 ### Malabares locales
@@ -702,7 +731,7 @@ stash@{1}: WIP on UNA-18: 7ff5ee3 fix: UNA-18 Allow single questions be omitted
 <!-- end_slide -->
 
 ### Malabares locales
-#### Stashing
+#### Stashing `EJERICIO 2`
 ---
 
 Recuperado de stash
@@ -748,8 +777,14 @@ git stash list
 
 <!-- end_slide -->
 
+<!-- jump_to_middle -->
 ### Malabares remotos
-#### Cherry-picking
+---
+
+<!-- end_slide -->
+
+### Malabares remotos
+#### Cherry-picking 
 ---
 
 Permite aplicar commits existentes en el directorio de trabajo actual.
@@ -895,7 +930,7 @@ $ git cherry-pick 531d90d
 <!-- end_slide -->
 
 ### Malabares remotos
-#### Cherry-picking
+#### Cherry-picking `EJERCICIO 3`
 ---
 
 Permite aplicar commits existentes en el directorio de trabajo actual.
@@ -1013,7 +1048,7 @@ Parecido al comando cherry-pick, estos comandos `literalmente están cambiando l
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up sencillo; mensaje de commit (--amend)
+#### F&#42;ck up sencillo; mensaje de commit (--amend) `EJERCICIO 4` 
 ---
 Dada la integración de semantic release [](https://github.com/semantic-release/commit-analyzer?tab=readme-ov-file#default-rules-matching) que usamos en los proyectos, los mensajes de commit deben tener un formato específico para generar una nueva versión a deployar.
 
@@ -1050,7 +1085,7 @@ Aspectos a considerar:
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up sencillo; Deshacer último commit (reset)
+#### F&#42;ck up sencillo; Deshacer último commit (reset) 
 ---
 
 Hay situaciones en las que acabamos de hacer un commit solo para darnos cuenta que faltó hacer algún otro cambio, o falto agregar otro archivo.
@@ -1147,7 +1182,7 @@ ab641d8 1 +a
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up sencillo; Deshacer último commit (reset)
+#### F&#42;ck up sencillo; Deshacer último commit (reset) `EJERCICIO 5`
 ---
 
 Para descartar mutliples commits basta con especificar cuantos commits detrás de HEAD `git reset HEAD~2` (afecta los últimos dos commits)
@@ -1263,7 +1298,7 @@ git revert d53515f ff33b1f 4edb9d2
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete)
+#### F&#42;ck up; dificil; Subir a rama incorrecta (cherry-pick sin delete) `EJERCICIO 6`
 ---
 
 Muy similar al ejemplo de cherry-pick, pero qué pasa si no podemos borrar la rama incorrecta (por ejemplo es otra rama que alguien activamente está trabajando)
@@ -1411,7 +1446,7 @@ Esta operación se repetirá para cada commit seleccionado
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i)   
+#### F&#42;ck up; dificil; Multiples errores en multiples commits (rebase -i) `EJERCICIO 7`   
 ---
 
 Finalmente queda resaltar que esta operación `reescribe la historia al generar nuevos commit` así que usenla de manera apropiada
@@ -1481,7 +1516,7 @@ Revert no cambia los commits históricos, aún se podía preservar los cambios p
 <!-- end_slide -->
 
 ### F&#42;ck ups
-#### Mega f&#42;ck up; F&#42;ck up en el fix de otro F&#42;ck up (reflog)
+#### Mega f&#42;ck up; F&#42;ck up en el fix de otro F&#42;ck up (reflog) `EJERCICIO 8`
 ---
 
 Con reflog podemos `regresar operaciones destructivas` como reset, rebase
@@ -1552,42 +1587,50 @@ Y reemplazamos el SHA1 en la url
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
 ```bash
-Ver resumen de commits 
+# Ver resumen de commits 
 git log <--oneline>
 
-Stash create
-git stash push <-- file1 file2>
+# Stash create
+git stash 
+git stash push
 
-Stash list
+# Stash create with message
+git stash -m"Message" < -- file1 file 2>
+git stash push < -- file1 file2>
+
+# Stash list
 git stash list
 
-Stash examinar entrada
+# Stash examinar entrada
 git stash show <n>
 
-Stash pop
+# Stash pop
 git stash pop <n>
 ```
 
 <!-- column: 1 -->
 
 ```bash
-Cherry-pick 
+# Cherry-pick 
 git cherry-pick [ commits ]
 
-Descartar commit 
+# Descartar commit 
 git reset <--hard> HEAD~<n>
 
-Nuevo commit contrario
+# Nuevo commit contrario
 git revert [ commits ]
 
-Nuevo commit contrario a merge
+# Nuevo commit contrario a merge
 git revert -m 1 <commit>
 
-Editar multiples commits
+# Editar multiples commits
 git rebase -i HEAD~<n>
 
-Commits de sección de archivo
+# Commits de sección de archivo
 git log -L start,end:path
+
+# Reescribir historia
+git push --force-with-lease
 ```
 
 <!-- reset_layout -->
