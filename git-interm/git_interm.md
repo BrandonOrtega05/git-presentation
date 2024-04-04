@@ -5,7 +5,7 @@ theme:
             theme_name: halcyon
         default:
             colors:
-                #background: "10141c"
+                background: "10141c"
 ---
 <!-- column_layout: [1,2] -->
 <!-- column: 0 -->
@@ -72,14 +72,11 @@ En la sección superior está marcado cuando hay un ejercicio relacionado al sli
 
 Bloques de código, con highlight:
 ```bash {all|1|2-4|all}
-$ git log --oneline
+$ git log --oneline # $ == comandos
 3cf53b0 (HEAD -> UNA-10) feat: UNA-10 1 commit
 70196b3 (main) Add filder struct and add titles
 84e3445 (origin/main) Upload wip presentation
 ```
-Donde: 
-- $ = comando
-
 <!-- pause -->
 
 Hasta abajo de mi pantalla hay dos cuadros ```"Slides"``` y ```"Terminal"``` el activo se marca en color verde
@@ -94,8 +91,8 @@ echo "Hola mundo"
 ```
 <!-- column: 1 -->
 ```bash
-# 🐱‍💻: Este otro emoji es porque voy a ejecutar
-# código en la pestaña "Terminal"
+# 🐱‍💻: Este otro emoji es porque voy a 
+# ejecutar código en la pestaña "Terminal"
 ps aux
 ```
 
