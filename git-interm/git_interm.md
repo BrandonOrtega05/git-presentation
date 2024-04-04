@@ -5,7 +5,7 @@ theme:
             theme_name: halcyon
         default:
             colors:
-                background: "10141c"
+                #background: "10141c"
 ---
 <!-- column_layout: [1,2] -->
 <!-- column: 0 -->
@@ -66,9 +66,15 @@ Mitsiu Alejandro Carreño Sarabia
 #### Convenciones - Algunos slides dicen `EJERCICIO 0`
 ---
 
-En la sección superior está marcado cuando hay un ejercicio relacionado al slide:
+<!-- column_layout: [3,1] -->
+<!-- column: 0 -->
+En la sección superior está marcado cuando hay un ejercicio relacionado al slide, si se me pasa avisenme:
 - Pueden clonar el repo pero no van a poder hacer push
 - Pueden hacer fork y hacer push a su copia del repo 
+
+<!-- column: 1 -->
+![](./assets/avisenme.gif)
+<!-- reset_layout -->
 
 Bloques de código, con highlight:
 ```bash {all|1|2-4|all}
@@ -83,7 +89,6 @@ Hasta abajo de mi pantalla hay dos cuadros ```"Slides"``` y ```"Terminal"``` el 
 
 <!-- column_layout: [1,1] -->
 <!-- column: 0 -->
-Bloques de código ejecutables:
 ```bash +exec
 # 🤖 : Este emoji es porque voy a ejecutar el 
 # código dentro de la presentación
@@ -93,7 +98,7 @@ echo "Hola mundo"
 ```bash
 # 🐱‍💻: Este otro emoji es porque voy a 
 # ejecutar código en la pestaña "Terminal"
-ps aux
+ps fax
 ```
 
 <!-- reset_layout -->
@@ -1465,7 +1470,7 @@ We all have those days, but today is not going to be one of them.
 <!-- column: 0 -->
 
 **Anecdota time!**   
-1  Por casualidad ví que mi cambio mío aprobado unos días antes se había borrado  
+1  Por casualidad ví que un cambio mío aprobado unos días antes había sido borrado mediante un PR  
 
 <!-- column: 1 -->
 ![](./assets/PR_offending_commit.png)
@@ -1482,7 +1487,7 @@ We all have those days, but today is not going to be one of them.
 
 ![](./assets/PR_summary.png)
 
-3  Por una parte me urgía hacer deploy, pero por otra, ese PR era demasiado grande como para revisarlo apropiadamente.
+3  Por un lado me urgía hacer deploy, por otro lado, ese PR era demasiado grande como para revisarlo apropiadamente.
 
 <!-- end_slide -->
 
@@ -1646,4 +1651,3 @@ git push --force-with-lease
 
 <!-- reset_layout -->
 
-<!-- end_slide -->
